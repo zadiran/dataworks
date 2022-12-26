@@ -1,4 +1,4 @@
-from framework.measurement.base import base_measurement
+from v1.measurement.base import base_measurement
 
 class mean_absolute_error(base_measurement):
     

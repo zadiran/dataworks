@@ -1,6 +1,8 @@
 # Custom ignore list
 *.pickle
 *.h5
+.vs/
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

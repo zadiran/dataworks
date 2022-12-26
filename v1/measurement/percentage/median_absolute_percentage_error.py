@@ -1,4 +1,4 @@
-from framework.measurement.base import base_measurement
+from v1.measurement.base import base_measurement
 from statistics import median
 
 class median_absolute_percentage_error(base_measurement):

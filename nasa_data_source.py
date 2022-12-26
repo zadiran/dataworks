@@ -5,7 +5,7 @@ class nasa_data_source:
         self.filepath = filepath_
         self.df = None
 
-    def get_data(self):
+    def get_data(self) -> pd.DataFrame:
         if  self.df is None:
             nms =  ['unit', 'time'] + ['s' + str(i) for i in range(1, 27)]
             self.df = pd.read_csv(self.filepath, sep = ' ', header = None, names= nms, index_col=False)

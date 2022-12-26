@@ -10,13 +10,13 @@ from baseline_continuous_forecast_model import baseline_continuous_forecast_mode
 from nasa_2d_data_manipulator import nasa_2d_data_manipulator
 from cnn_forecast_model import cnn_forecast_model
 
-from framework.measurement.absolute import root_mean_square_error as rmse
-from framework.measurement.absolute import mean_absolute_error as mae
+from v1.measurement.absolute import root_mean_square_error as rmse
+from v1.measurement.absolute import mean_absolute_error as mae
 
 from scipy.stats import kruskal
 
 # CNN
-nds = nasa_data_source('D:\\Projects\\dataworks\\v2\\train_FD001.txt')
+nds = nasa_data_source('D:\\Projects\\dataworks\\train_FD001.txt')
 dm = nasa_2d_data_manipulator(nds)
 
 models = []
@@ -147,7 +147,7 @@ print('CNN total rmse after Kruskal-Wallis ' + str(rmse().calculate(real2, exp2)
 print('CNN total mae after Kruskal-Wallis  ' + str(mae().calculate(real2, exp2)))
 
 plt.plot(output_data)
-#plt.plot(unitsmagnified)
+plt.plot(unitsmagnified)
 plt.plot(avg_forecast)
 plt.plot(df['res'].to_numpy())
 plt.plot(df['kruskal2'].to_numpy(), color = 'pink')
@@ -156,40 +156,3 @@ plt.plot(df['kruskal'].to_numpy(), color='yellow')
 #plt.plot(avg_forecast2, color = 'green')
 plt.show()
 
-
-# Linear regression
-# dm_1d = nasa_data_manipulator(nds)
-# lin_models = []
-# for i in range(0,5):
-#     fm = baseline_continuous_forecast_model(dm_1d)
-    
-#     dm_1d.set_cv_range(i * 19 + 1, (i+1) * 19 + 1)
-#     fm.fit()
-
-#     lin_models.append(fm)
-
-# lin_forecast = []
-# for row in dm_1d.get_clean_validation_input():
-#         results = []
-#         for m in lin_models:
-#             results.append(m.predict(row)[0])
-#         lin_forecast.append(np.mean(results))
-
-# lin_expected = dm_1d.get_clean_validation_output()
-
-# print('Lin. regr. total rmse ' + str(rmse().calculate(lin_forecast, lin_expected)))
-# print('Lin. regr. total mae  ' + str(mae().calculate(lin_forecast, lin_expected)))
-
-# plt.plot(lin_expected)
-
-# plt.plot(lin_forecast)
-# plt.show()
-
-
-# TODO
-# 1. порядок в репозитории (v1, v2)
-# 2. реализация всех стратегий (head head, head tail)
-# 3. реализация стратегий для каждой фичи
-# 4. обучение cnn на данных после водораздела деградации
-# стратегии в excel файле
-#  

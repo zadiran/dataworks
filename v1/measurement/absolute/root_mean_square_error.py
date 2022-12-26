@@ -1,5 +1,5 @@
-from framework.measurement.base import base_measurement
-from framework.measurement.absolute import mean_square_error as mse
+from v1.measurement.base import base_measurement
+from v1.measurement.absolute import mean_square_error as mse
 
 class root_mean_square_error(base_measurement):
     

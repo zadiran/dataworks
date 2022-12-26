@@ -33,6 +33,9 @@ class nasa_2d_data_manipulator:
     def get_exclusion_range(self):
         return [96, 97, 98, 99, 100]
 
+    def set_splitter(self, splitter):
+        self.splitter = splitter
+
     def normalize(self, df):
         result = df.copy()
         for feature_name in self.get_param_cols():
@@ -55,7 +58,7 @@ class nasa_2d_data_manipulator:
 
         df = self.normalize(df)
         return df
-
+        
     def get_training_input(self):
         pickle_filename = 'training_input_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
         if exists(pickle_filename):

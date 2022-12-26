@@ -1,4 +1,4 @@
-from framework.measurement.base import base_measurement
+from v1.measurement.base import base_measurement
 
 class root_mean_square_percentage_error(base_measurement):
     
