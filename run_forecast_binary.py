@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 from nasa_data_source import nasa_data_source
 from nasa_data_manipulator import nasa_data_manipulator
-from baseline_binary_forecast_model import baseline_binary_forecast_model
+from models.baseline_binary_forecast_model import baseline_binary_forecast_model
 
 
 ds = nasa_data_source('train_FD001.txt')

@@ -1,6 +1,6 @@
 from typing import List
 from data_source import data_source
-from point import point
+from utilities.point import point
 
 class test_data_source(data_source):
     def get_data() -> List[point]:

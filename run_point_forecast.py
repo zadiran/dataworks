@@ -1,12 +1,12 @@
 from typing import List
-from point import point
+from utilities.point import point
 from point_data_source import point_data_source as pds
-from splitter import splitter 
+from utilities.splitter import splitter 
 
 from data_source import data_source
 
 from scipy.stats import kruskal
-from cnn_point_forecast_model import cnn_point_forecast_model as cpfm
+from models.cnn_point_forecast_model import cnn_point_forecast_model as cpfm
 
 window_size = 50
 
@@ -21,20 +21,20 @@ normal_cnt = []
 degr_cnt = []
     
 def top_split_func(combined_train_set, verification_set):
-    splt2 = splitter(pds, 3, verification_set)
+    splt2 = splitter()
 
     print('###########################################')
     print('# top split')
     print('###########################################')
     # models - array of [model_for_splitting, model_for_forecasting]
-    models = splt2.run(prepare_models, combined_train_set)
+    models = splt2.run(prepare_models, combined_train_set, 3, verification_set)
     
     print ('=== models learned ===')
     for model_set in models:
         degr_data = get_degr_data(verification_set, model_set[0])
         results = model_set[1].predict_points(degr_data)
         for r in results:
-            output_diffs.append(abs(r.output - r.forecasted_RUL))
+            output_diffs.append(abs(r.training_output - r.forecasted_output))
 
 
 # returns [model_for_splitting, model_for_forecasting]
@@ -53,7 +53,7 @@ def prepare_models(long_set, short_set):
 def get_degr_data(dataset : List[point], cnn : cpfm):
     for pt in dataset:
         pt.is_degradation = False
-        pt.forecasted_RUL = 0
+        pt.forecasted_output = 0
 
     inputs = []
     for pt in dataset:
@@ -61,7 +61,7 @@ def get_degr_data(dataset : List[point], cnn : cpfm):
 
     forecasts = cnn.predict(inputs)
     for p, f in zip(dataset, forecasts):
-        p.forecasted_RUL = f
+        p.forecasted_output = f
     
     unique_units = list(set(map(lambda x: x.unit, dataset)))
     print(f'unique units: {unique_units}')
@@ -123,8 +123,8 @@ def hmhm(points : List[point]):
         
             
             
-splt_1 = splitter(pds, 4, [])
-splt_1.run(top_split_func, data)
+splt_1 = splitter()
+splt_1.run(top_split_func, data, 4, [])
 
 print(f'MAE HMHM: {sum(output_diffs) / len(output_diffs)}')
 

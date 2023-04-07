@@ -5,13 +5,13 @@ import math
 
 from nasa_data_source import nasa_data_source
 from nasa_data_manipulator import nasa_data_manipulator
-from baseline_continuous_forecast_model import baseline_continuous_forecast_model
+from models.baseline_continuous_forecast_model import baseline_continuous_forecast_model
 
 from nasa_2d_data_manipulator import nasa_2d_data_manipulator
-from cnn_forecast_model import cnn_forecast_model
+from models.cnn_forecast_model import cnn_forecast_model
 
-from v1.measurement.absolute import root_mean_square_error as rmse
-from v1.measurement.absolute import mean_absolute_error as mae
+from measurement.absolute import root_mean_square_error as rmse
+from measurement.absolute import mean_absolute_error as mae
 
 from scipy.stats import kruskal
 
