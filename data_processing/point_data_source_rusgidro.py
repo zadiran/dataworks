@@ -1,5 +1,5 @@
 from typing import List
-from data_processing.data_source import data_source
+from data_processing import csv_data_source
 from utils.point import point
 
 import pandas as pd
@@ -10,7 +10,8 @@ from os.path import exists
 class point_data_source_rusgidro:
     def get_data(self, filename, window_size) -> List[point]:
                
-        raw_records = self.get_raw_records(filename)
+        raw_records = csv_data_source().get_data(filename, ';')
+        raw_records = raw_records.drop('s8', 'columns')
         #raw_records = self.normalize(raw_records)
         
         output : List[point] = []
@@ -27,8 +28,8 @@ class point_data_source_rusgidro:
                 for i in range(0, group_df.shape[0] - window_size + 1):
 
                     input_val = pd.DataFrame(group_df[i:i + window_size])
-                    input_val = input_val.drop('time', 1)
-                    input_val = input_val.drop('unit', 1)
+                    input_val = input_val.drop('time', 'columns')
+                    input_val = input_val.drop('unit', 'columns')
 
                     output_val = max_time - group_df.loc[i + window_size - 1, 'time']
                     input_val_1 = []
@@ -43,12 +44,6 @@ class point_data_source_rusgidro:
         print(f'raw: {len(raw_records)}; output:{len(output)}; diff = {len(raw_records) - len(output)}')
         print(output[0].input)
         return output
-    
-    def get_raw_records(self, filename):
-        nms =  ['unit', 'time'] + ['s' + str(i) for i in range(1, 8)]
-        df =  pd.read_csv(filename, sep = ';', header = None, names= nms, index_col=False)
-
-        return df
     
     def normalize(self, df: pd.DataFrame):
         result = df.copy()
