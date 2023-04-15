@@ -4,7 +4,7 @@ import numpy as np
 import xgboost as xg
 
 from models.point_forecast_model import point_forecast_model
-from utilities.point import point
+from utils.point import point
 
 class xgboost_point_forecast_model(point_forecast_model):
 

@@ -1,7 +1,7 @@
 from sklearn.linear_model import LogisticRegression
 
 from models.forecast_model import forecast_model
-from nasa_data_manipulator import nasa_data_manipulator
+from data_processing.nasa_data_manipulator import nasa_data_manipulator
 
 
 class baseline_binary_forecast_model(forecast_model):

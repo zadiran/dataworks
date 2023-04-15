@@ -1,7 +1,7 @@
 from typing import List
-from utilities.point import point
+from utils.point import point
 from point_data_source import point_data_source as pds
-from utilities.splitter import splitter 
+from utils.splitter import splitter 
 
 from data_source import data_source
 

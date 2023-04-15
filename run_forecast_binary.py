@@ -2,16 +2,18 @@ from sklearn.metrics import roc_auc_score, f1_score, accuracy_score, precision_s
 
 import matplotlib.pyplot as plt
 
-from nasa_data_source import nasa_data_source
-from nasa_data_manipulator import nasa_data_manipulator
+from data_processing.nasa_data_source import nasa_data_source
+from data_processing.nasa_data_manipulator import nasa_data_manipulator
 from models.baseline_binary_forecast_model import baseline_binary_forecast_model
 
+from utils.splitter import splitter
 
 ds = nasa_data_source('train_FD001.txt')
 dm = nasa_data_manipulator(ds)
 
 output = []
 expected = []
+
 
 for i in range(0,5):
     fm = baseline_binary_forecast_model(dm)

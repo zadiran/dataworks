@@ -1,6 +1,6 @@
 from typing import List
-from data_source import data_source
-from utilities.point import point
+from .data_source import data_source
+from utils.point import point
 
 import pandas as pd
 import pickle

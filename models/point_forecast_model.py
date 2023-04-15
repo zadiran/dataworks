@@ -1,7 +1,7 @@
 from typing import List
 
 from models.forecast_model import forecast_model
-from utilities.point import point
+from utils.point import point
 
 class point_forecast_model(forecast_model):
 

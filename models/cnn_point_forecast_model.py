@@ -7,7 +7,7 @@ import numpy as np
 
 
 from models.point_forecast_model import point_forecast_model
-from utilities.point import point
+from utils.point import point
 
 class cnn_point_forecast_model(point_forecast_model):
 

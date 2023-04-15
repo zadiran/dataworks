@@ -13,11 +13,7 @@ class cnn_forecast_model(forecast_model):
 
     def fit(self):
         train_input = self.dm.get_training_input()
-        #print('input shape: ' + str(train_input.shape))
-        #print(train_input[-1])
         train_output = self.dm.get_training_output()
-        #print('output shape: ' + str(train_output.shape))
-        #print(train_output[-100:])
         self.fit_internal(train_input, train_output)
 
     def fit_internal(self, train_input, train_output):

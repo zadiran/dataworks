@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 from models.point_forecast_model import point_forecast_model
-from utilities.point import point
+from utils.point import point
 
 class linear_regression_point_forecast_model(point_forecast_model):
 

@@ -1,6 +1,6 @@
 from typing import List
 
-from utilities.point import point
+from utils.point import point
 
 #=======================================================================================
 # splitter
