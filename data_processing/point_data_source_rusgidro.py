@@ -59,5 +59,3 @@ class point_data_source_rusgidro:
                 print(min_value)
                 result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
         return result
-
-#point_data_source().get_data('train_FD001.txt', 50)

@@ -10,7 +10,7 @@ from models.cnn_point_forecast_model import cnn_point_forecast_model as cpfm
 
 window_size = 50
 
-data = pds().get_data('train_FD001.txt', window_size)
+data = pds().get_data('data/train_FD001.txt', window_size)
 
 class virtual_data_source(data_source):
     def get_data():
