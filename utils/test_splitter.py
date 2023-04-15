@@ -1,5 +1,5 @@
 from utils.splitter import splitter
-from test_data_source import test_data_source
+from data_processing.test_data_source import test_data_source
 
 def func(long, short):
     print('long')
