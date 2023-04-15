@@ -18,7 +18,7 @@ class cnn_forecast_model(forecast_model):
 
     def fit_internal(self, train_input, train_output):
         
-        path = 'local/model/regression_model.cnn.h5'
+        path = '.local/model/regression_model.cnn.h5'
 
         cnn = Sequential([
             Conv1D(filters= 64, kernel_size= 3, activation='relu'),

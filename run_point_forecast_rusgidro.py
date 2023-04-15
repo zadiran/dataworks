@@ -14,7 +14,7 @@ from measurement.utils import calculate_measurements_for_points
 
 window_size = 7
 
-data = pds().get_data('local/data/top10pmaxavg_stage_1.csv', window_size)
+data = pds().get_data('.local/data/top10pmaxavg_stage_1.csv', window_size)
 
 output_diffs = []
 normal_cnt = []
