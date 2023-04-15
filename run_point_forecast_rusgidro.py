@@ -1,7 +1,6 @@
 from typing import List
-from utilities.point import point
+from utils.point import point
 from data_processing.point_data_source_rusgidro import point_data_source_rusgidro as pds
-from utilities.splitter import splitter 
 import matplotlib.pyplot as plt
 
 
@@ -11,6 +10,7 @@ from models.xgboost_point_forecast_model import xgboost_point_forecast_model as 
 
 from measurement.absolute import root_mean_square_error as rmse
 from measurement.absolute import mean_absolute_error as mae
+from measurement.utils import calculate_measurements_for_points
 
 window_size = 7
 
@@ -24,13 +24,6 @@ outpt : List[point] = []
     
 def top_split_func(combined_train_set, verification_set):
     
-    # print('=================================')
-    # print('=================================')
-    # print('=================================')
-    # print('=================================')
-    # print(combined_train_set)
-    # print(verification_set)
-
     model_for_forecasting = xgb_model()
     model_for_forecasting.fit(combined_train_set)
     model_for_forecasting.predict_points(verification_set)
@@ -67,12 +60,13 @@ for p in pairs:
 
 
 print('++++++++++++++++++++++++++++++++')
-#print(outpt)
+
 plt.plot(list(map(lambda x: x.training_output, outpt)))
 plt.plot(list(map(lambda x: x.forecasted_output, outpt)))
 plt.show()
 
-print(f'RMSE: {rmse().calculate(list(map(lambda x: x.training_output, outpt)), list(map(lambda x: x.forecasted_output, outpt)))}')
-print(f'MAE: {mae().calculate(list(map(lambda x: x.training_output, outpt)), list(map(lambda x: x.forecasted_output, outpt)))}')
+measurements = calculate_measurements_for_points([rmse(), mae()], outpt)
+for m in measurements:
+    print(f'{m.name}: {m.value}')
 
 
