@@ -8,7 +8,7 @@ from models.baseline_binary_forecast_model import baseline_binary_forecast_model
 
 from utils.splitter import splitter
 
-ds = nasa_data_source('train_FD001.txt')
+ds = nasa_data_source('data/train_FD001.txt')
 dm = nasa_data_manipulator(ds)
 
 output = []

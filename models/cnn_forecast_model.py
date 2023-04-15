@@ -3,7 +3,7 @@ from tensorflow.keras.layers import Conv1D, MaxPool1D, Flatten, Dense
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from models.forecast_model import forecast_model
-from nasa_2d_data_manipulator import nasa_2d_data_manipulator
+from data_processing.nasa_2d_data_manipulator import nasa_2d_data_manipulator
 
 class cnn_forecast_model(forecast_model):
 

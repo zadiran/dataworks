@@ -1,9 +1,9 @@
 from typing import List
 from utils.point import point
-from point_data_source import point_data_source as pds
+from data_processing.point_data_source import point_data_source as pds
 from utils.splitter import splitter 
 
-from data_source import data_source
+from data_processing.data_source import data_source
 
 from scipy.stats import kruskal
 from models.cnn_point_forecast_model import cnn_point_forecast_model as cpfm
@@ -84,7 +84,7 @@ def get_degr_data(dataset : List[point], cnn : cpfm):
 def hmhm(points : List[point]):
     rul_values = []
     for pt in points:
-        rul_values.append(pt.forecasted_RUL)
+        rul_values.append(pt.forecasted_output)
 
     kruskal_values = []
     diff = 5

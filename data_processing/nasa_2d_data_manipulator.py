@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 from os.path import exists
 
-from nasa_data_source import nasa_data_source
+from .nasa_data_source import nasa_data_source
 
 
 class nasa_2d_data_manipulator:
@@ -60,7 +60,7 @@ class nasa_2d_data_manipulator:
         return df
         
     def get_training_input(self):
-        pickle_filename = 'training_input_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
+        pickle_filename = '.local/cache/training_input_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
         if exists(pickle_filename):
             print('found training input cache for range ' + str(self.cv_start) + '-' + str(self.cv_end))
             with open(pickle_filename, 'rb') as handle:
@@ -86,7 +86,7 @@ class nasa_2d_data_manipulator:
 
 
     def get_training_output(self):
-        pickle_filename = 'training_output_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
+        pickle_filename = '.local/cache/training_output_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
         if exists(pickle_filename):
             print('found training output cache for range ' + str(self.cv_start) + '-' + str(self.cv_end))
             with open(pickle_filename, 'rb') as handle:
@@ -103,7 +103,7 @@ class nasa_2d_data_manipulator:
         return arr
     
     def get_testing_input(self):
-        pickle_filename = 'testing_input_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
+        pickle_filename = '.local/cache/testing_input_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
         if exists(pickle_filename):
             print('found testing input cache for range ' + str(self.cv_start) + '-' + str(self.cv_end))
             with open(pickle_filename, 'rb') as handle:
@@ -129,7 +129,7 @@ class nasa_2d_data_manipulator:
         return arr
 
     def get_testing_output(self):
-        pickle_filename = 'testing_output_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
+        pickle_filename = '.local/cache/testing_output_' + str(self.cv_start) + '_' + str(self.cv_end) + '.pickle'
         if exists(pickle_filename):
             print('found testing output cache for range ' + str(self.cv_start) + '-' + str(self.cv_end))
             with open(pickle_filename, 'rb') as handle:

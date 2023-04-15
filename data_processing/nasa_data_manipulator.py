@@ -1,4 +1,4 @@
-from nasa_data_source import nasa_data_source
+from .nasa_data_source import nasa_data_source
 
 class nasa_data_manipulator:
     def __init__(self, data_source: nasa_data_source) -> None:

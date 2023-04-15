@@ -3,11 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-from nasa_data_source import nasa_data_source
-from nasa_data_manipulator import nasa_data_manipulator
+from data_processing.nasa_data_source import nasa_data_source
+from data_processing.nasa_data_manipulator import nasa_data_manipulator
 from models.baseline_continuous_forecast_model import baseline_continuous_forecast_model
 
-from nasa_2d_data_manipulator import nasa_2d_data_manipulator
+from data_processing.nasa_2d_data_manipulator import nasa_2d_data_manipulator
 from models.cnn_forecast_model import cnn_forecast_model
 
 from measurement.absolute import root_mean_square_error as rmse
@@ -16,7 +16,7 @@ from measurement.absolute import mean_absolute_error as mae
 from scipy.stats import kruskal
 
 # CNN
-nds = nasa_data_source('D:\\Projects\\dataworks\\train_FD001.txt')
+nds = nasa_data_source('data/train_FD001.txt')
 dm = nasa_2d_data_manipulator(nds)
 
 models = []

@@ -1,7 +1,7 @@
 from sklearn.linear_model import LinearRegression
 
 from models.forecast_model import forecast_model
-from nasa_data_manipulator import nasa_data_manipulator
+from data_processing.nasa_data_manipulator import nasa_data_manipulator
 
 class baseline_continuous_forecast_model(forecast_model):
 

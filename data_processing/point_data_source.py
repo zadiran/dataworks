@@ -9,7 +9,8 @@ from os.path import exists
 
 class point_data_source:
     def get_data(self, filename, window_size) -> List[point]:
-        pickle_filename = f'all_input_{filename}.pickle'
+        fn = str.replace(filename, '/', '_')
+        pickle_filename = f'.local/cache/all_input_{fn}.pickle'
         if exists(pickle_filename):
             print('found all input cache')
             with open(pickle_filename, 'rb') as handle:
@@ -37,7 +38,7 @@ class point_data_source:
 
                     output_val = max_time - group_df.loc[i + window_size - 1, 'time']
 
-                    pnt = point(unit = unit, input = input_val.to_numpy(), output = output_val)
+                    pnt = point(unit = unit, input = input_val.to_numpy(), training_output = output_val)
                     
                     
                     output.append(pnt)
