@@ -11,7 +11,7 @@ class point_data_source_rusgidro:
     def get_data(self, filename, window_size) -> List[point]:
                
         raw_records = csv_data_source().get_data(filename, ';')
-        raw_records = raw_records.drop('s8', 'columns')
+        raw_records = raw_records.drop('s8', axis='columns')
         #raw_records = self.normalize(raw_records)
         
         output : List[point] = []
@@ -28,8 +28,8 @@ class point_data_source_rusgidro:
                 for i in range(0, group_df.shape[0] - window_size + 1):
 
                     input_val = pd.DataFrame(group_df[i:i + window_size])
-                    input_val = input_val.drop('time', 'columns')
-                    input_val = input_val.drop('unit', 'columns')
+                    input_val = input_val.drop('time', axis='columns')
+                    input_val = input_val.drop('unit', axis='columns')
 
                     output_val = max_time - group_df.loc[i + window_size - 1, 'time']
                     input_val_1 = []

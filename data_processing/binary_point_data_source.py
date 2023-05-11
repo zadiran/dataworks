@@ -33,8 +33,8 @@ class binary_point_data_source:
                 for i in range(0, group_df.shape[0] - window_size + 1):
 
                     input_val = pd.DataFrame(group_df[i:i + window_size])
-                    input_val = input_val.drop('time', 1)
-                    input_val = input_val.drop('unit', 1)
+                    input_val = input_val.drop('time', axis='columns')
+                    input_val = input_val.drop('unit', axis='columns')
 
                     input_val_1 = []
                     for x in input_val.values:
@@ -58,14 +58,14 @@ class binary_point_data_source:
     def get_raw_records(self, filename):
         nms =  ['unit', 'time'] + ['s' + str(i) for i in range(1, 25)]
         df =  pd.read_csv(filename, sep = ' ', header = None, names= nms, index_col=False)
-        df = df.drop('s3', 1)
-        df = df.drop('s4', 1)
-        df = df.drop('s8', 1)
-        df = df.drop('s9', 1)
-        df = df.drop('s13', 1)
-        df = df.drop('s19', 1)
-        df = df.drop('s21', 1)
-        df = df.drop('s22', 1)
+        df = df.drop('s3', axis='columns')
+        df = df.drop('s4', axis='columns')
+        df = df.drop('s8', axis='columns')
+        df = df.drop('s9', axis='columns')
+        df = df.drop('s13', axis='columns')
+        df = df.drop('s19', axis='columns')
+        df = df.drop('s21', axis='columns')
+        df = df.drop('s22', axis='columns')
 
         return df
     

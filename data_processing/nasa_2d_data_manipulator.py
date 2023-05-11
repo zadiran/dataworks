@@ -47,14 +47,14 @@ class nasa_2d_data_manipulator:
     def get_marked_dataset(self):
         columns = ['unit', 'time'] + ['s' + str(i) for i in range(1, 25)]
         df = self.data_source.get_data()[columns]
-        df = df.drop('s3',1)
-        df = df.drop('s4',1)
-        df = df.drop('s8',1)
-        df = df.drop('s9',1)
-        df = df.drop('s13',1)
-        df = df.drop('s19',1)
-        df = df.drop('s21',1)
-        df = df.drop('s22',1)
+        df = df.drop('s3', axis='columns')
+        df = df.drop('s4', axis='columns')
+        df = df.drop('s8', axis='columns')
+        df = df.drop('s9', axis='columns')
+        df = df.drop('s13', axis='columns')
+        df = df.drop('s19', axis='columns')
+        df = df.drop('s21', axis='columns')
+        df = df.drop('s22', axis='columns')
 
         df = self.normalize(df)
         return df
@@ -74,8 +74,8 @@ class nasa_2d_data_manipulator:
             cycle_end = cv_data.at[i + self.window_size - 1, 'unit']
             if cycle_start == cycle_end:
                 dfa = cv_data.iloc[i : i + self.window_size]
-                dfa = dfa.drop('unit', 1)
-                dfa = dfa.drop('time', 1)
+                dfa = dfa.drop('unit', axis='columns')
+                dfa = dfa.drop('time', axis='columns')
                 result.append(dfa[self.get_param_cols()].to_numpy())
         
         arr = np.array(result)
@@ -118,8 +118,8 @@ class nasa_2d_data_manipulator:
             cycle_end = cv_data.at[i + self.window_size - 1, 'unit']
             if cycle_start == cycle_end and (i + 1 == maxiterindex or cv_data.at[i + self.window_size, 'unit'] == cycle_start):
                 dfa = cv_data.iloc[i : i + self.window_size]
-                dfa = dfa.drop('unit', 1)
-                dfa = dfa.drop('time', 1)
+                dfa = dfa.drop('unit', axis='columns')
+                dfa = dfa.drop('time', axis='columns')
                 result.append(dfa[self.get_param_cols()].to_numpy())
         
         arr = np.array(result)
@@ -157,14 +157,14 @@ class nasa_2d_data_manipulator:
 
     def get_clean_training_input(self):
         ti = self.get_cv_training_input()
-        ti = ti.drop('unit', 1)
-        ti = ti.drop('time', 1)
+        ti = ti.drop('unit', axis='columns')
+        ti = ti.drop('time', axis='columns')
         return ti
 
     def get_clean_testing_input(self):
         ti = self.get_cv_testing_input()
-        ti = ti.drop('unit', 1)
-        ti = ti.drop('time', 1)
+        ti = ti.drop('unit', axis='columns')
+        ti = ti.drop('time', axis='columns')
         return ti
     
     def get_units(self):

@@ -24,8 +24,8 @@ class nasa_data_manipulator:
     def get_clean_validation_input(self):
         df = self.get_full_dataset()
         df_tr = df.loc[df['unit'].isin(self.get_exclusion_range())]
-        df_tr = df_tr.drop('unit', 1)
-        df_tr = df_tr.drop('time', 1)
+        df_tr = df_tr.drop('unit', axis='columns')
+        df_tr = df_tr.drop('time', axis='columns')
         return df_tr.to_numpy()
 
     def get_clean_validation_output(self):
@@ -54,14 +54,14 @@ class nasa_data_manipulator:
 
     def get_clean_training_input(self):
         ti = self.get_cv_training_input()
-        ti = ti.drop('unit', 1)
-        ti = ti.drop('time', 1)
+        ti = ti.drop('unit', axis='columns')
+        ti = ti.drop('time', axis='columns')
         return ti
 
     def get_clean_testing_input(self):
         ti = self.get_cv_testing_input()
-        ti = ti.drop('unit', 1)
-        ti = ti.drop('time', 1)
+        ti = ti.drop('unit', axis='columns')
+        ti = ti.drop('time', axis='columns')
         return ti
     
     def get_cv_training_output(self):
