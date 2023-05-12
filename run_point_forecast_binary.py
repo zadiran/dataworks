@@ -3,13 +3,27 @@ from sklearn.metrics import roc_auc_score, f1_score, accuracy_score, precision_s
 import matplotlib.pyplot as plt
 
 from models.baseline_binary_point_forecast_model import baseline_binary_point_forecast_model
-from data_processing.binary_point_data_source import binary_point_data_source
+from data_processing import csv_data_source
+from data_processing.configurable import configurable_data_manipulator
+from data_processing.configurable.stages.pre_point_conversion import drop_columns, normalize
+from data_processing.configurable.stages.point_conversion import convert_to_1d_input
+from data_processing.configurable.stages.post_point_conversion import convert_to_binary_output
+
 
 from utils.splitter import splitter
 
 window_size = 10
 
-data = binary_point_data_source().get_data('data/train_FD001.txt', window_size)
+raw_data = csv_data_source().get_data('data/train_FD001.csv', ';')
+
+cdm = configurable_data_manipulator('.local/cache/all_input_binary.pickle')
+
+cdm.add_pre_point_conversion_stage(drop_columns(['s3', 's4', 's8', 's9', 's13', 's19', 's21', 's22']))
+cdm.add_pre_point_conversion_stage(normalize())
+cdm.set_point_conversion_stage(convert_to_1d_input(window_size))
+cdm.add_post_point_conversion_stage(convert_to_binary_output(10))
+
+data = cdm.get_processed_data(raw_data)
 
 def split_func(training_set, verification_set):
     bbpfm = baseline_binary_point_forecast_model()

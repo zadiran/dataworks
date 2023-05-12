@@ -1,1 +1,2 @@
 from .base_post_point_conversion_stage import base_post_point_conversion_stage
+from .convert_to_binary_output import convert_to_binary_output
