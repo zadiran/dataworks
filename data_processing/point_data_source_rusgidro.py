@@ -42,7 +42,7 @@ class point_data_source_rusgidro:
                     output.append(pnt)
 
         print(f'raw: {len(raw_records)}; output:{len(output)}; diff = {len(raw_records) - len(output)}')
-        print(output[0].input)
+        #print(output[0].input)
         return output
     
     def normalize(self, df: pd.DataFrame):

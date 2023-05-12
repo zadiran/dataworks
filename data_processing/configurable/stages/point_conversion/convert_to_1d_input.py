@@ -5,7 +5,7 @@ from data_processing.configurable.stages.point_conversion.base_point_conversion_
 from utils import point
 
 
-class convert_to_2d_input(base_point_conversion_stage):
+class convert_to_1d_input(base_point_conversion_stage):
      def __init__(self, window_size: int):
          self.window_size = window_size
 
@@ -18,7 +18,7 @@ class convert_to_2d_input(base_point_conversion_stage):
             group_df = group_df.reset_index(drop=True)
             max_time = group_df['time'].max()
             
-            print (f'Unit: {unit}, len: {group_df.shape}, max time: {max_time}')
+            #print (f'Unit: {unit}, len: {group_df.shape}, max time: {max_time}')
 
             if group_df.shape[0] >= self.window_size:
                 for i in range(0, group_df.shape[0] - self.window_size + 1):
@@ -27,15 +27,16 @@ class convert_to_2d_input(base_point_conversion_stage):
                     input_val = input_val.drop('time', axis='columns')
                     input_val = input_val.drop('unit', axis='columns')
 
+                    input_val_1d = []
+                    for x in input_val.values:
+                        input_val_1d = input_val_1d + list(x)
+
                     output_val = max_time - group_df.loc[i + self.window_size - 1, 'time']
 
-                    pnt = point(unit = unit, input = input_val.to_numpy(), training_output = output_val)
+                    pnt = point(unit = unit, input = input_val_1d, training_output = output_val)
                     
                     
                     output.append(pnt)
 
-        # with open(pickle_filename, 'wb') as handle:
-        #     pickle.dump(output, handle, protocol=pickle.HIGHEST_PROTOCOL)
-
-        print(f'raw: {len(df)}; output:{len(output)}; diff = {len(df) - len(output)}')
+        #print(f'raw: {len(df)}; output:{len(output)}; diff = {len(df) - len(output)}')
         return output
