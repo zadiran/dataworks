@@ -11,7 +11,7 @@ class point_data_source:
     def get_data(self, filename, window_size) -> List[point]:
         fn = str.replace(filename, '/', '_')
         pickle_filename = f'.local/cache/all_input_{fn}.pickle'
-        if False and exists(pickle_filename):
+        if exists(pickle_filename):
             print('found all input cache')
             with open(pickle_filename, 'rb') as handle:
                 return pickle.load(handle)
