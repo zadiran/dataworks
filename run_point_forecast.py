@@ -1,20 +1,30 @@
 from typing import List
+from data_processing import csv_data_source
+from data_processing.configurable import configurable_data_manipulator
+from data_processing.configurable.stages.point_conversion import convert_to_2d_input
+from data_processing.configurable.stages.pre_point_conversion import drop_columns, normalize
 from utils.point import point
-from data_processing.point_data_source import point_data_source
 from utils.splitter import splitter 
 
-from data_processing.data_source import data_source
 
 from scipy.stats import kruskal
 from models.cnn_point_forecast_model import cnn_point_forecast_model as cpfm
 
 window_size = 50
 
-data = point_data_source().get_data('data/train_FD001.txt', window_size)
+#data = point_data_source().get_data('data/train_FD001.txt', window_size)
 
-class virtual_data_source(data_source):
-    def get_data():
-        return data
+raw_data = csv_data_source().get_data('data/train_FD001.csv', ';')
+
+cdm = configurable_data_manipulator(None)
+cdm.add_pre_point_conversion_stage(drop_columns(['s3', 's4', 's8', 's9', 's13', 's19', 's21', 's22']))
+cdm.add_pre_point_conversion_stage(normalize())
+cdm.set_point_conversion_stage(convert_to_2d_input(window_size))
+
+data = cdm.get_processed_data(raw_data)
+
+
+
 
 output_diffs = []
 normal_cnt = []
