@@ -11,7 +11,7 @@ class point_data_source:
     def get_data(self, filename, window_size) -> List[point]:
         fn = str.replace(filename, '/', '_')
         pickle_filename = f'.local/cache/all_input_{fn}.pickle'
-        if exists(pickle_filename):
+        if False and exists(pickle_filename):
             print('found all input cache')
             with open(pickle_filename, 'rb') as handle:
                 return pickle.load(handle)
@@ -27,7 +27,7 @@ class point_data_source:
             group_df = group_df.reset_index(drop=True)
             max_time = group_df['time'].max()
             
-            print (f'Unit: {unit}, len: {group_df.shape}, max time: {max_time}')
+            #print (f'Unit: {unit}, len: {group_df.shape}, max time: {max_time}')
 
             if group_df.shape[0] >= window_size:
                 for i in range(0, group_df.shape[0] - window_size + 1):

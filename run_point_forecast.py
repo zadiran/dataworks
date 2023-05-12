@@ -1,6 +1,6 @@
 from typing import List
 from utils.point import point
-from data_processing.point_data_source import point_data_source as pds
+from data_processing.point_data_source import point_data_source
 from utils.splitter import splitter 
 
 from data_processing.data_source import data_source
@@ -10,7 +10,7 @@ from models.cnn_point_forecast_model import cnn_point_forecast_model as cpfm
 
 window_size = 50
 
-data = pds().get_data('data/train_FD001.txt', window_size)
+data = point_data_source().get_data('data/train_FD001.txt', window_size)
 
 class virtual_data_source(data_source):
     def get_data():
