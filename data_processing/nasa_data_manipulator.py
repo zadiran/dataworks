@@ -114,37 +114,3 @@ class nasa_data_manipulator:
                 last_failure = i 
 
         return res
-
-    def get_test_proximity(self):
-        arr = self.get_testing_output()
-        res = []
-        last_failure = -1
-        for i in range(0, len(arr)):
-            if arr[i] == 0:
-                continue
-            else:
-                cnt = i - last_failure 
-                res += list(reversed(range(0, cnt)))
-                last_failure = i 
-
-        return res
-
-    def get_logical_proximity(self, array, distance):
-        proximity = self.get_proximity_for_arr(array)
-        output = []
-        for i in proximity:
-            if i <= distance:
-                output.append(1)
-            else:
-                output.append(0)
-        return output
-
-    def get_test_logical_proximity(self, distance):
-        proximity = self.get_test_proximity()
-        output = []
-        for i in proximity:
-            if i <= distance:
-                output.append(1)
-            else:
-                output.append(0)
-        return output

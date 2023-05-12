@@ -3,7 +3,6 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 from models.point_forecast_model import point_forecast_model
-from data_processing.nasa_data_manipulator import nasa_data_manipulator
 from utils.point import point
 
 
