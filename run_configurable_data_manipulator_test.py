@@ -4,7 +4,6 @@ from data_processing.configurable.stages.point_conversion.convert_to_1d_input im
 from data_processing.configurable.stages.point_conversion.convert_to_2d_input import convert_to_2d_input
 from data_processing.configurable.stages.pre_point_conversion.drop_columns import drop_columns
 from data_processing.configurable.stages.pre_point_conversion.normalize import normalize
-from data_processing.point_data_source_rusgidro import point_data_source_rusgidro as pds
 
 # window_size = 5
 
@@ -26,21 +25,3 @@ from data_processing.point_data_source_rusgidro import point_data_source_rusgidr
 # data2 = point_data_source().get_data('data/train_FD001.txt', window_size)
 # print(data2[0].input)
 
-
-
-window_size = 7
-
-data = csv_data_source().get_data('.local/data/top10pmaxavg_stage_1.csv', ';')
-
-cdm = configurable_data_manipulator(None)
-
-cdm.add_pre_point_conversion_stage(drop_columns(['s8']))
-
-cdm.set_point_conversion_stage(convert_to_1d_input(window_size))
-
-processed_data = cdm.get_processed_data(data)
-print(processed_data[0].input)
-
-print('aaaaa')
-data = pds().get_data('.local/data/top10pmaxavg_stage_1.csv', window_size)
-print(data[0].input)

@@ -1,6 +1,9 @@
 from typing import List
+from data_processing import csv_data_source
+from data_processing.configurable import configurable_data_manipulator
+from data_processing.configurable.stages.point_conversion import convert_to_1d_input
+from data_processing.configurable.stages.pre_point_conversion import drop_columns
 from utils.point import point
-from data_processing.point_data_source_rusgidro import point_data_source_rusgidro as pds
 import matplotlib.pyplot as plt
 
 
@@ -14,7 +17,13 @@ from measurement.utils import calculate_measurements_for_points
 
 window_size = 7
 
-data = pds().get_data('.local/data/top10pmaxavg_stage_1.csv', window_size)
+raw_data = csv_data_source().get_data('.local/data/top10pmaxavg_stage_1.csv', ';')
+
+cdm = configurable_data_manipulator(None)
+cdm.add_pre_point_conversion_stage(drop_columns(['s8']))
+cdm.set_point_conversion_stage(convert_to_1d_input(window_size))
+
+data = cdm.get_processed_data(raw_data)
 
 output_diffs = []
 normal_cnt = []
