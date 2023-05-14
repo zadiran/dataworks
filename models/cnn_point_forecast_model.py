@@ -35,7 +35,7 @@ class cnn_point_forecast_model(point_forecast_model):
             Dense(1)
         ])
         cnn.compile(optimizer="rmsprop", loss = "mean_squared_error", metrics = "mae")
-        cnn.fit(train_input, train_output, epochs=35, batch_size = 200, verbose = 1, validation_split= 0.2, use_multiprocessing=True, shuffle= True, callbacks= [
+        cnn.fit(train_input, train_output, epochs=35, batch_size = 200, verbose = 0, validation_split= 0.2, use_multiprocessing=True, shuffle= True, callbacks= [
            EarlyStopping(patience=10, mode = 'min'),
            ModelCheckpoint(path, save_best_only=True, mode = 'min')
         ])

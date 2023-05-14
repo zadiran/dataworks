@@ -22,8 +22,7 @@ class xgboost_point_forecast_model(point_forecast_model):
 
     def fit_internal(self, train_input, train_output):
 
-        xgb_r = xg.XGBRegressor(objective ='reg:linear',
-                  n_estimators = 10, seed = 123)
+        xgb_r = xg.XGBRegressor(objective='reg:linear', n_estimators=100, seed=123)
   
         ## Fitting the model
         xgb_r.fit(train_input, train_output)
