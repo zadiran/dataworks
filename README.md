@@ -1,6 +1,6 @@
 # Framework-for-machine-learning-based-researches
 
-## Update 12.07.2022
+## Update 08.01.2024
 
 
 Файлы для запуска:
